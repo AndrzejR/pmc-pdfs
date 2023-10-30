@@ -13,9 +13,12 @@ for filepath in glob.glob("data/*xlsx"):
     pdf.add_page()
 
     filename = Path(filepath).stem
-    invoice_number = filename.split('-')[0]
+    invoice_number, invoice_date = filename.split('-')
     pdf.set_font(family=FONT, style="B", size=20)
-    pdf.cell(w=0, h=10, txt=f"Invoice {invoice_number}", ln=1)
+    pdf.cell(w=0, h=10, txt=f"Invoice nr {invoice_number}", ln=1)
+
+    pdf.set_font(family=FONT, style="B", size=14)
+    pdf.cell(w=0, h=10, txt=f"Date {invoice_date.replace('.','/')}", ln=1)
     pdf.cell(w=0, h=10, txt="", ln=1)
 
     pdf.set_font(family=FONT, style="B", size=10)
